@@ -39,7 +39,6 @@ open class B03NoLoop {
      * Suppose it is the Problem.kt - huge loop with no-so-often call profile
      */
 
-
     @State(Scope.Benchmark)
     open class ExecutionPlan {
         lateinit var arrayList: ArrayList<Int>
@@ -70,7 +69,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 10)
     @Measurement(iterations = 5, batchSize = 10)
-    fun testIterationLinked10(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationLinked10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
@@ -78,7 +80,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 100)
     @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationLinked100(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationLinked100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
@@ -86,7 +91,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
     @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationLinked1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationLinked1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
@@ -94,7 +102,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 10)
     @Measurement(iterations = 5, batchSize = 10)
-    fun testIterationArray10(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationArray10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }
@@ -102,7 +113,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 100)
     @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationArray100(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationArray100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }
@@ -110,7 +124,10 @@ open class B03NoLoop {
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
     @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationArray1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationArray1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }

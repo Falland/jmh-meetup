@@ -15,7 +15,6 @@ import org.openjdk.jmh.annotations.Level
 import java.util.LinkedList
 import java.util.concurrent.TimeUnit
 
-
 @BenchmarkMode(Mode.SingleShotTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Fork(1)
@@ -35,9 +34,9 @@ open class B04Baseline {
         lateinit var linkedIterator: Iterator<Int>
         lateinit var baseline: Iterator<Int>
 
-        var elementsCount: Int = 10_000
+        var elementsCount: Int = 200_000
 
-        @Setup(Level.Trial)
+        @Setup(Level.Iteration)
         fun setup() {
             arrayList = ArrayList()
             linkedList = LinkedList()
@@ -49,7 +48,6 @@ open class B04Baseline {
                 linkedList.add(i)
             }
 
-
             arrayIterator = arrayList.iterator()
             linkedIterator = linkedList.iterator()
             baseline = Baseline()
@@ -58,72 +56,99 @@ open class B04Baseline {
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 10)
-    fun testIterationLinked10(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationLinked10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationLinked100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationLinked100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationLinked1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationLinked1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.linkedIterator.hasNext())
         blackhole.consume(plan.linkedIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 10)
-    fun testIterationArray10(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationArray10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationArray100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationArray100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationArray1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationArray1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.arrayIterator.hasNext())
         blackhole.consume(plan.arrayIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 10)
-    fun testIterationBaseline10(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testBaseline10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationBaseline100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testBaseline100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationBaseline1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testBaseline1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
@@ -131,7 +156,6 @@ open class B04Baseline {
     open class Baseline : Iterator<Int> {
         override fun hasNext(): Boolean = true
 
-        override fun next(): Int  = 42
-
+        override fun next(): Int = 42
     }
 }

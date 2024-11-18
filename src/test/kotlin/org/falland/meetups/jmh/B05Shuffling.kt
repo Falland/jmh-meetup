@@ -74,7 +74,7 @@ open class B05Shuffling {
             unshuffledArrayIterator = unshuffledArrayList.iterator()
         }
 
-        private fun allocateRandom() : Int {
+        private fun allocateRandom(): Int {
             val count = rnd.nextInt(42)
             for (i in 0 until count) {
                 set.add(Any())
@@ -86,121 +86,166 @@ open class B05Shuffling {
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 100)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationShuffledLinked100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationShuffledLinked10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledLinkedIterator.hasNext())
         blackhole.consume(plan.shuffledLinkedIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationShuffledLinked1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationShuffledLinked100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledLinkedIterator.hasNext())
         blackhole.consume(plan.shuffledLinkedIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 10000)
-    @Measurement(iterations = 5, batchSize = 10000)
-    fun testIterationShuffledLinked10000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationShuffledLinked1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledLinkedIterator.hasNext())
         blackhole.consume(plan.shuffledLinkedIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 100)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationShuffledArray100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationShuffledArray10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledArrayIterator.hasNext())
         blackhole.consume(plan.shuffledArrayIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationShuffledArray1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationShuffledArray100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledArrayIterator.hasNext())
         blackhole.consume(plan.shuffledArrayIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 10000)
-    @Measurement(iterations = 5, batchSize = 10000)
-    fun testIterationShuffledArray10000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationShuffledArray1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.shuffledArrayIterator.hasNext())
         blackhole.consume(plan.shuffledArrayIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 100)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationUnshuffledArray100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationUnshuffledArray10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledArrayIterator.hasNext())
         blackhole.consume(plan.unshuffledArrayIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationUnshuffledArray1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationUnshuffledArray100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledArrayIterator.hasNext())
         blackhole.consume(plan.unshuffledArrayIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 10000)
-    @Measurement(iterations = 5, batchSize = 10000)
-    fun testIterationUnshuffledArray10000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationUnshuffledArray1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledArrayIterator.hasNext())
         blackhole.consume(plan.unshuffledArrayIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 100)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationUnshuffledLinked100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationUnshuffledLinked10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledLinkedIterator.hasNext())
         blackhole.consume(plan.unshuffledLinkedIterator.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationUnshuffledLinked1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationUnshuffledLinked100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledLinkedIterator.hasNext())
         blackhole.consume(plan.unshuffledLinkedIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 10000)
-    @Measurement(iterations = 5, batchSize = 10000)
-    fun testIterationUnshuffledLinked10000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationUnshuffledLinked1000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.unshuffledLinkedIterator.hasNext())
         blackhole.consume(plan.unshuffledLinkedIterator.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 100)
-    @Measurement(iterations = 5, batchSize = 100)
-    fun testIterationBaseline100(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 10)
+    fun testIterationBaseline10(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
 
     @Benchmark
     @Warmup(iterations = 5, batchSize = 1000)
-    @Measurement(iterations = 5, batchSize = 1000)
-    fun testIterationBaseline1000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Measurement(iterations = 100, batchSize = 100)
+    fun testIterationBaseline100(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
 
     @Benchmark
-    @Warmup(iterations = 5, batchSize = 10000)
-    @Measurement(iterations = 5, batchSize = 10000)
-    fun testIterationBaseline10000(blackhole: Blackhole, plan: ExecutionPlan) {
+    @Warmup(iterations = 5, batchSize = 1000)
+    @Measurement(iterations = 100, batchSize = 1000)
+    fun testIterationBaseline10000(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         blackhole.consume(plan.baseline.hasNext())
         blackhole.consume(plan.baseline.next())
     }
@@ -208,7 +253,6 @@ open class B05Shuffling {
     open class Baseline : Iterator<Int> {
         override fun hasNext(): Boolean = true
 
-        override fun next(): Int  = 42
-
+        override fun next(): Int = 42
     }
 }

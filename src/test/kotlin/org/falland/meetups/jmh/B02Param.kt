@@ -34,7 +34,7 @@ open class B02Param {
         lateinit var linkedList: LinkedList<Int>
 
         @Param("10", "100", "1000")
-        var elementsCount: Int = 0;
+        var elementsCount: Int = 0
 
         @Setup(Level.Trial)
         fun setup() {
@@ -47,12 +47,14 @@ open class B02Param {
             for (i in 0 until elementsCount) {
                 linkedList.add(i)
             }
-
         }
     }
 
     @Benchmark
-    fun testIterationLinked(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationLinked(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         val iterator = plan.linkedList.iterator()
         while (iterator.hasNext()) {
             blackhole.consume(iterator.next())
@@ -60,7 +62,10 @@ open class B02Param {
     }
 
     @Benchmark
-    fun testIterationArray(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationArray(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         val iterator = plan.arrayList.iterator()
         while (iterator.hasNext()) {
             blackhole.consume(iterator.next())

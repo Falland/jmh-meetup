@@ -1,8 +1,6 @@
 package org.falland.meetups.jmh
 
 class Problem {
-
-
     val SIGN_BIT: Int = -0x80000000
     var EXP_BITS: Int = 0x7ff00000
     var tiny: Double = 1.0e-300
@@ -17,19 +15,21 @@ class Problem {
         return (transducer shr 32).toInt()
     }
 
-    fun __HI_LO(high: Int, low: Int): Double {
-        return java.lang.Double.longBitsToDouble(
+    fun __HI_LO(
+        high: Int,
+        low: Int,
+    ): Double =
+        java.lang.Double.longBitsToDouble(
             (high.toLong() shl 32) or
-                    (low.toLong() and 0xffffffffL)
+                (low.toLong() and 0xffffffffL),
         )
-    }
 
     fun doStuff(list: List<Int>): Double {
         var complexSum = 0.0
         for (element in list) {
             var z = 0.0
             val sign = SIGN_BIT
-            /*unsigned*/
+            // unsigned
             var r: Int
             var t1: Int
             var s1: Int
@@ -44,7 +44,6 @@ class Problem {
             ix0 = __HI(x) // high word of x
             ix1 = __LO(x) // low word of x
 
-
             // take care of Inf and NaN
             if ((ix0 and EXP_BITS) == EXP_BITS) { // sqrt(NaN)=NaN, sqrt(+inf)=+inf, sqrt(-inf)=sNaN
                 complexSum += x * x + x
@@ -56,8 +55,7 @@ class Problem {
                 if (((ix0 and (sign.inv())) or ix1) == 0) {
                     complexSum += x
                     break
-                }
-                else if (ix0 < 0) { // sqrt(-ve) = sNaN
+                } else if (ix0 < 0) { // sqrt(-ve) = sNaN
                     complexSum += (x - x) / (x - x)
                     break
                 }
@@ -82,12 +80,11 @@ class Problem {
             }
             m -= 1023 // unbias exponent */
             ix0 = (ix0 and 0x000fffff) or 0x00100000
-            if ((m and 1) != 0) {        // odd m, double x to make it even
+            if ((m and 1) != 0) { // odd m, double x to make it even
                 ix0 += ix0 + ((ix1 and sign) ushr 31) // unsigned shift
                 ix1 += ix1
             }
             m = m shr 1 // m = [m/2]
-
 
             // generate sqrt(x) bit by bit
             ix0 += ix0 + ((ix1 and sign) ushr 31) // unsigned shift
@@ -119,7 +116,7 @@ class Problem {
                         s0 += 1
                     }
                     ix0 -= t
-                    if (Integer.compareUnsigned(ix1, t1) < 0) {  // ix1 < t1
+                    if (Integer.compareUnsigned(ix1, t1) < 0) { // ix1 < t1
                         ix0 -= 1
                     }
                     ix1 -= t1
@@ -129,7 +126,6 @@ class Problem {
                 ix1 += ix1
                 r = r ushr 1 // unsigned shift
             }
-
 
             // use floating add to find out rounding direction
             if ((ix0 or ix1) != 0) {
@@ -157,11 +153,6 @@ class Problem {
             ix0 += (m shl 20)
             complexSum += __HI_LO(ix0, ix1)
         }
-        return complexSum;
+        return complexSum
     }
 }
-
-
-
-
-

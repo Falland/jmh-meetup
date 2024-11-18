@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
-
 plugins {
     id("java")
     kotlin("jvm") version "2.0.21"
@@ -12,7 +10,6 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
-
 
 dependencies {
     testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-benchmark-runtime", version = "0.4.12")

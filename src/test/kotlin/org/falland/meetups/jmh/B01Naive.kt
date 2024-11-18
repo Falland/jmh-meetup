@@ -22,10 +22,10 @@ import java.util.concurrent.TimeUnit
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 open class B01Naive {
     /*
-    * Suppose you've asked to review the benchmark and the result it yields before they are shared with the team
-    * How would you go about this benchmark?
-    * Would you ask any questions?
-    */
+     * Suppose you've asked to review the benchmark and the result it yields before they are shared with the team
+     * How would you go about this benchmark?
+     * Would you ask any questions?
+     */
 
     @State(Scope.Benchmark)
     open class ExecutionPlan {
@@ -45,12 +45,14 @@ open class B01Naive {
             for (i in 0 until elementsCount) {
                 linkedList.add(i)
             }
-
         }
     }
 
     @Benchmark
-    fun testIterationArray(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationArray(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         val iterator = plan.arrayList.iterator()
         while (iterator.hasNext()) {
             blackhole.consume(iterator.next())
@@ -58,7 +60,10 @@ open class B01Naive {
     }
 
     @Benchmark
-    fun testIterationLinked(blackhole: Blackhole, plan: ExecutionPlan) {
+    fun testIterationLinked(
+        blackhole: Blackhole,
+        plan: ExecutionPlan,
+    ) {
         val iterator = plan.linkedList.iterator()
         while (iterator.hasNext()) {
             blackhole.consume(iterator.next())
