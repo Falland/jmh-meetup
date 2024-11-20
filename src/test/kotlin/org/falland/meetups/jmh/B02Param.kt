@@ -23,7 +23,8 @@ import java.util.concurrent.TimeUnit
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 open class B02Param {
     /*
-     * Let's start with one of the questions: what is the size of the problem?
+     * Let's start with one of the questions: what is the size of
+     * the problem?
      * Suppose the answer it from 10 to a thousand of elements
      * Great, let's maybe see if we can parametrise the benchmark
      */

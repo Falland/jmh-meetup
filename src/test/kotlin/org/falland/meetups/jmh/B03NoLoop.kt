@@ -15,18 +15,6 @@ import org.openjdk.jmh.annotations.Level
 import java.util.LinkedList
 import java.util.concurrent.TimeUnit
 
-/**
- * What if our problem looks like
- * <pre>{@code
- *  for (item in list) {
- *     //hundreds of lines of code for processing the element
- *  }
- * }</pre>
- *
- * Then we can not count on the loop optimisations: unrolling, inlining and/or vectorisation etc.
- * How do we go about measuring the iteration then?
- */
-
 @BenchmarkMode(Mode.SingleShotTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Fork(1)
@@ -41,13 +29,13 @@ open class B03NoLoop {
 
     @State(Scope.Benchmark)
     open class ExecutionPlan {
-        lateinit var arrayList: ArrayList<Int>
-        lateinit var linkedList: LinkedList<Int>
+        private lateinit var arrayList: ArrayList<Int>
+        private lateinit var linkedList: LinkedList<Int>
 
         lateinit var arrayIterator: Iterator<Int>
         lateinit var linkedIterator: Iterator<Int>
 
-        var elementsCount: Int = 10_000
+        private var elementsCount: Int = 10_000
 
         @Setup(Level.Trial)
         fun setup() {

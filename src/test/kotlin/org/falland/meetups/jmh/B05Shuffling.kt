@@ -22,19 +22,20 @@ import kotlin.random.Random
 open class B05Shuffling {
     /*
      * Wait, but are we excluding the regularity in our data set?
-     * Is our list populated all at once or there's something running between the adds?
+     * Is our list populated all at once or there's something running
+     * between the adds?
      * Assume it's not all at once
      * Let's shuffle the data, would it change the results?
      */
 
     @State(Scope.Benchmark)
     open class ExecutionPlan {
-        lateinit var shuffledLinkedList: LinkedList<Int>
-        lateinit var unshuffledLinkedList: LinkedList<Int>
-        lateinit var shuffledArrayList: ArrayList<Int>
-        lateinit var unshuffledArrayList: ArrayList<Int>
+        private lateinit var shuffledLinkedList: LinkedList<Int>
+        private lateinit var unshuffledLinkedList: LinkedList<Int>
+        private lateinit var shuffledArrayList: ArrayList<Int>
+        private lateinit var unshuffledArrayList: ArrayList<Int>
 
-        var elementsCount: Int = 100_000
+        private var elementsCount: Int = 110_000
 
         lateinit var shuffledLinkedIterator: Iterator<Int>
         lateinit var shuffledArrayIterator: Iterator<Int>
@@ -42,7 +43,7 @@ open class B05Shuffling {
         lateinit var unshuffledArrayIterator: Iterator<Int>
         lateinit var baseline: Iterator<Int>
 
-        val rnd: Random = Random(42)
+        private val rnd: Random = Random(42)
         val set: MutableSet<Any> = HashSet()
 
         @Setup(Level.Trial)

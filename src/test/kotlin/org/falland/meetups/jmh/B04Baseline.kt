@@ -20,21 +20,21 @@ import java.util.concurrent.TimeUnit
 @Fork(1)
 open class B04Baseline {
     /*
-     * Good, but how far are our results from the practically fastest solution?
+     * How far are our results from the practically fastest solution?
      * This data would give us some idea on how to measure the two profiles.
      * Is the difference big or small in comparison with the baseline?
      */
 
     @State(Scope.Benchmark)
     open class ExecutionPlan {
-        lateinit var linkedList: LinkedList<Int>
-        lateinit var arrayList: ArrayList<Int>
+        private lateinit var linkedList: LinkedList<Int>
+        private lateinit var arrayList: ArrayList<Int>
 
         lateinit var arrayIterator: Iterator<Int>
         lateinit var linkedIterator: Iterator<Int>
         lateinit var baseline: Iterator<Int>
 
-        var elementsCount: Int = 200_000
+        private var elementsCount: Int = 200_000
 
         @Setup(Level.Iteration)
         fun setup() {

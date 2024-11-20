@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 open class B01Naive {
     /*
-     * Suppose you've asked to review the benchmark and the result it yields before they are shared with the team
+     * Suppose you've asked to review the benchmark and the result it
+     * yields before they are shared with the team
      * How would you go about this benchmark?
      * Would you ask any questions?
      */
@@ -32,7 +33,7 @@ open class B01Naive {
         lateinit var arrayList: ArrayList<Int>
         lateinit var linkedList: LinkedList<Int>
 
-        var elementsCount: Int = 10
+        private var elementsCount: Int = 10
 
         @Setup(Level.Trial)
         fun setup() {
